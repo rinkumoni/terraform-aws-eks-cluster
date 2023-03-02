@@ -51,7 +51,16 @@ resource "aws_eks_cluster" "this" {
     service_ipv4_cidr = var.cluster_service_ipv4_cidr
     ip_family         = var.ip_family
   }
+  dynamic "encryption_config" {
+    for_each = toset(var.cluster_encryption_config)
 
+    content {
+      provider {
+        key_arn = encryption_config.value.provider_key_arn
+      }
+      resources = encryption_config.value.resources
+    }
+  }
   timeouts {
     create = var.cluster_create_timeout
     update = var.cluster_update_timeout
