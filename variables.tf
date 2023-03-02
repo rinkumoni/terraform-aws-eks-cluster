@@ -4,6 +4,11 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "cluster_encryption_config" {
+  description = "Configuration block with encryption configuration for the cluster"
+  type        = list(any)
+  default     = []
+}
 variable "cluster_version" {
   description = "Kubernetes version to be used for creatimg the EKS cluster."
   type        = string
