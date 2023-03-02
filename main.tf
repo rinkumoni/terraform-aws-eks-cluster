@@ -1,6 +1,3 @@
-data "aws_vpc" "default" {
-  default = true
-}
 
 locals {
   cluster_sg_name           = coalesce(var.cluster_security_group_name, "${var.cluster_name}")
